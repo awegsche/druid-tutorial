@@ -9,6 +9,8 @@ mod view;
 mod delegate;
 mod controller;
 
+const TOKIO_DELAY: u64 = 5;
+
 #[tokio::main]
 async fn main() {
     println!("Hello, world!");
@@ -31,9 +33,9 @@ async fn main() {
 }
 
 async fn wait_and_execute(event_sink: druid::ExtEventSink) {
-    tokio::time::sleep(Duration::from_millis(5000)).await;
+    tokio::time::sleep(Duration::from_millis(TOKIO_DELAY * 1000)).await;
 
-    println!("1s has passed");
+    println!("{}s has passed", TOKIO_DELAY);
     event_sink.add_idle_callback(move |data: &mut AppState| {
         data.add_todo();
     })

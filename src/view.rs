@@ -1,5 +1,5 @@
 
-use druid::{Widget, WidgetExt, widget::{Button, Checkbox, Flex, Label, List, TextBox}};
+use druid::{Insets, Widget, WidgetExt, widget::{Button, Checkbox, Flex, Label, List, TextBox}};
 
 use crate::{controller::TodoItemController, data::*};
 
@@ -14,6 +14,7 @@ fn new_todo_textbox() -> impl Widget<AppState> {
     Flex::row()
     .with_flex_child(new_todo_textbox, 1.0)
     .with_child(add_todo_button)
+    .padding(Insets::new(10.0, 10.0, 10.0, 10.0))
 }
 
 fn todo_item() -> impl Widget<TodoItem> {
@@ -26,5 +27,5 @@ fn todo_item() -> impl Widget<TodoItem> {
 pub fn build_ui() -> impl Widget<AppState> {
     Flex::column()
     .with_child(new_todo_textbox())
-    .with_child( List::new(todo_item).lens(AppState::todos))
+    .with_child( List::new(todo_item).lens(AppState::todos).padding(Insets::new(10.0, 10.0, 10.0, 10.0)))
 }
